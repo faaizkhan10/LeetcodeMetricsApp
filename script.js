@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded",function(){
         ];
     
         console.log("card ka data: " , cardsData);
-        console.log("Card Stats Container:", cardStatsContainer);
+       
         cardStatsContainer.innerHTML = cardsData.map(
             data => 
                     `<div class="card">
