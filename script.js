@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded",function(){
     const easyLabel = document.getElementById("easy-label");
     const mediumLabel = document.getElementById("medium-label");
     const hardLabel = document.getElementById("hard-label");
-    const cardStatsConatiner= document.querySelector(".stats-cards");
+    const cardStatsContainer= document.querySelector(".stats-cards");
 
 
     function validateUsername(username){
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded",function(){
         }
         
         catch(error){
-            statsContainer.innerHTML=`<p>No Data found</p>`;
+            statsContainer.innerHTML=`<p>${error.message}</p>`;
         }
         finally{
             searchButton.textContent="Search";
@@ -89,7 +89,27 @@ document.addEventListener("DOMContentLoaded",function(){
         updateProgress(solvedTotalHardQues,totalHardQues,hardLabel,hardProgressCircle);
         // updateProgress(solvedTotalQues,totalQues,easyLabel,easyProgressCircle);
 
+        const cardsData = [
+            {label: "Overall Submissions", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[0].submissions },
+            {label: "Overall Easy Submissions", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[1].submissions },
+            {label: "Overall Medium Submissions", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[2].submissions },
+            {label: "Overall Hard Submissions", value:parsedData.data.matchedUser.submitStats.totalSubmissionNum[3].submissions },
+        ];
+    
+        console.log("card ka data: " , cardsData);
+        console.log("Card Stats Container:", cardStatsContainer);
+        cardStatsContainer.innerHTML = cardsData.map(
+            data => 
+                    `<div class="card">
+                    <h4>${data.label}</h4>
+                    <p>${data.value}</p>
+                    </div>`
+        ).join("")
+
     }
+
+    
+
     searchButton.addEventListener('click',function(){
         const username = usernameInput.value;
         console.log("loggin username :",username);
